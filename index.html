@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dyna Form</title>
+</head>
+<body>
+  <dyna-form id="dynaForm"></dyna-form>
+
+  <script type="module">
+    const structure = {
+      metadata: {
+        title: "User Registration Form",
+        description: "Please fill in your details to register"
+      },
+      fields: [
+        {
+          name: "firstName",
+          label: "First Name",
+          type: "text",
+          required: true,
+          placeholder: "Enter your first name",
+          validators: [
+            {
+              type: "minLength",
+              value: 2,
+              message: "First name must be at least 2 characters"
+            },
+            {
+              type: "maxLength",
+              value: 50,
+              message: "First name cannot exceed 50 characters"
+            }
+          ]
+        },
+        {
+          name: "lastName",
+          label: "Last Name",
+          type: "text",
+          required: true,
+          placeholder: "Enter your last name"
+        },
+        {
+          name: "email",
+          label: "Email",
+          type: "email",
+          required: true,
+          placeholder: "Enter your email",
+          validators: [
+            {
+              type: "email",
+              message: "Please enter a valid email address"
+            }
+          ]
+        },
+        {
+          name: "phone",
+          label: "Phone Number",
+          type: "text",
+          placeholder: "+1234567890",
+          validators: [
+            {
+              type: "phone",
+              message: "Please enter a valid phone number"
+            }
+          ]
+        },
+        {
+          name: "age",
+          label: "Age",
+          type: "number",
+          required: true,
+          validators: [
+            {
+              type: "min",
+              value: 18,
+              message: "You must be at least 18 years old"
+            },
+            {
+              type: "max",
+              value: 120,
+              message: "Please enter a valid age"
+            }
+          ]
+        },
+        {
+          name: "website",
+          label: "Website",
+          type: "text",
+          placeholder: "https://example.com",
+          validators: [
+            {
+              type: "url",
+              message: "Please enter a valid URL"
+            }
+          ]
+        },
+        {
+          name: "country",
+          label: "Country",
+          type: "select",
+          required: true,
+          options: [
+            { value: "", label: "Select a country" },
+            { value: "us", label: "United States" },
+            { value: "ca", label: "Canada" },
+            { value: "gb", label: "United Kingdom" },
+            { value: "fr", label: "France" },
+            { value: "de", label: "Germany" }
+          ]
+        },
+        {
+          name: "newsletter",
+          label: "Subscribe to Newsletter",
+          type: "radio",
+          options: [
+            { value: "yes", label: "Yes" },
+            { value: "no", label: "No" }
+          ]
+        }
+      ]
+    };
+
+    const value = {
+      firstName: "John",
+      lastName: "Doe",
+      email: "john.doe@example.com",
+      phone: "+1234567890",
+      age: 30,
+      website: "https://example.com",
+      country: "us",
+      newsletter: "yes"
+    };
+
+    const dynaFormElement = document.getElementById('dynaForm');
+    dynaFormElement.structure = structure;
+    dynaFormElement.value = value;
+
+    dynaFormElement.onSubmit = (values) => {
+      console.log('Form Submitted:', values);
+    };
+
+    dynaFormElement.onReset = () => {
+      console.log('Form Reset');
+    };
+  </script>
+
+  <script type="module" src="/src/dyna-form.ts"></script>
+</body>
+</html>
